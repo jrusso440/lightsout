@@ -24,7 +24,10 @@ class MainActivity : AppCompatActivity() {
         // Add the same click handler to all grid buttons
         for (gridButton in lightGridLayout.children) {
             gridButton.setOnClickListener(this::onLightButtonClick)
+            gridButton.setOnLongClickListener (this::onLightButtonLongClick)
         }
+
+
 
         lightOnColor = ContextCompat.getColor(this, R.color.yellow)
         lightOffColor = ContextCompat.getColor(this, R.color.black)
@@ -54,6 +57,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun onLightButtonLongClick(view: View): Boolean {
+
+        // Find the button's row and col
+        val buttonIndex = lightGridLayout.indexOfChild(view)
+        val row = buttonIndex / GRID_SIZE
+        val col = buttonIndex % GRID_SIZE
+        if (row == 0 && col ==0)
+            setButtonsOff()
+        return true
+    }
+
     private fun setButtonColors() {
 
         // Set all buttons' background color
@@ -66,9 +80,20 @@ class MainActivity : AppCompatActivity() {
 
             if (game.isLightOn(row, col)) {
                 gridButton.setBackgroundColor(lightOnColor)
-            } else {
+
                 gridButton.setBackgroundColor(lightOffColor)
             }
+        }
+    }
+
+    private fun setButtonsOff() {
+
+        // Set all buttons' background color
+        for (buttonIndex in 0 until lightGridLayout.childCount) {
+            val gridButton = lightGridLayout.getChildAt(buttonIndex)
+
+            // Find the button's row and col
+            gridButton.setBackgroundColor(lightOffColor)
         }
     }
 
