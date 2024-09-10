@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
 
             if (game.isLightOn(row, col)) {
                 gridButton.setBackgroundColor(lightOnColor)
-
+            } else {
                 gridButton.setBackgroundColor(lightOffColor)
             }
         }
