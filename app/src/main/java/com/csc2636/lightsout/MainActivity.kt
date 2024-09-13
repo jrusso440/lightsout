@@ -1,4 +1,5 @@
 package com.csc2636.lightsout
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.GridLayout
@@ -99,5 +100,10 @@ class MainActivity : AppCompatActivity() {
 
     fun onNewGameClick(view: View) {
         startGame()
+    }
+
+    fun onHelpClick(view: View) {
+        val intent = Intent(this, HelpActivity::class.java)
+        startActivity(intent)
     }
 }
